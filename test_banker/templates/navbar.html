@@ -21,5 +21,11 @@
             <span><a href="{% url 'accounts:login' %}">Login</a></span>
         {% endif %}
     </span>
+    {% url 'uploader:upload_file' as upload_file %}
+    <span>{% if request.path == upload_file %}Upload File{% else %}<a href="{{upload_file}}">Upload File</a>{% endif %}</span>
+    </span>
+    {% url 'uploader:file_list' as file_list %}
+    <span>{% if request.path == file_list %}File List{% else %}<a href="{{file_list}}">File List</a>{% endif %}</span>
+
 </div>
 
