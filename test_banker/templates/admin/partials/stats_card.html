@@ -1,0 +1,37 @@
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <div class="flex items-center">
+            <div class="p-3 rounded-full bg-blue-100 text-primary mr-4">
+                <i class="fas fa-chalkboard-teacher text-xl"></i>
+            </div>
+            <div>
+                <p class="text-gray-500">Total Teachers</p>
+                <h3 class="text-2xl font-bold">{{ stats.total_teachers }}</h3>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <div class="flex items-center">
+            <div class="p-3 rounded-full bg-green-100 text-green-500 mr-4">
+                <i class="fas fa-book text-xl"></i>
+            </div>
+            <div>
+                <p class="text-gray-500">Total Subjects</p>
+                <h3 class="text-2xl font-bold">{{ stats.total_subjects }}</h3>
+            </div>
+        </div>
+    </div>
+    
+    <div class="bg-white p-6 rounded-lg shadow-md">
+        <div class="flex items-center">
+            <div class="p-3 rounded-full bg-purple-100 text-purple-500 mr-4">
+                <i class="fas fa-file-alt text-xl"></i>
+            </div>
+            <div>
+                <p class="text-gray-500">Uploaded Files</p>
+                <h3 class="text-2xl font-bold">{{ stats.total_files }}</h3>
+            </div>
+        </div>
+    </div>
+</div>

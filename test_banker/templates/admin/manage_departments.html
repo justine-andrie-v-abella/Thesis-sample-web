@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Manage Departments - Test Bank Management System{% endblock %}
+
+{% block content %}
+<nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
+    <div class="flex items-center">
+        <button id="sidebar-toggle" class="text-gray-600 mr-4 focus:outline-none">
+            <i class="fas fa-bars text-xl"></i>
+        </button>
+        <h1 class="text-xl font-bold text-primary">Admin Dashboard</h1>
+    </div>
+    <!-- User menu same as dashboard -->
+</nav>
+
+<div class="flex">
+    <div id="sidebar" class="sidebar bg-primary text-white h-screen w-64">
+        <!-- Same sidebar as dashboard -->
+    </div>
+    
+    <div class="flex-1 p-6 ml-64">
+        <h1 class="text-2xl font-bold text-gray-800 mb-6">Manage Departments</h1>
+        <div class="bg-white rounded-lg shadow-md p-6">
+            <p>Department management content will go here.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
