@@ -1,175 +1,191 @@
-{% extends "base.html" %}
-{% load static %}
+{% extends 'base.html' %}
 
 {% block title %}Admin Dashboard - Test Bank Management System{% endblock %}
 
 {% block content %}
-<!-- Navbar -->
-<nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
-    <div class="flex items-center">
-        <button id="sidebar-toggle" class="text-gray-600 mr-4 focus:outline-none">
-            <i class="fas fa-bars text-xl"></i>
-        </button>
-        <h1 class="text-xl font-bold text-primary">Admin Dashboard</h1>
-    </div>
+<div class="min-h-screen">
+    {% include 'admin/partials/navbar.html' %}
     
-    <div class="flex items-center">
-        <div class="relative mr-4">
-            <input type="text" placeholder="Search..." class="pl-10 pr-4 py-2 rounded-lg border focus:outline-none focus:ring-2 focus:ring-primary">
-            <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-        </div>
-        <div class="relative">
-            <button class="flex items-center text-gray-700 focus:outline-none" id="user-menu-button">
-                <img src="https://ui-avatars.com/api/?name={{ user.username }}&background=1e40af&color=fff" alt="{{ user.username }}" class="w-8 h-8 rounded-full">
-                <span class="ml-2">{{ user.username }}</span>
-                <i class="fas fa-chevron-down ml-2"></i>
-            </button>
-        </div>
-    </div>
-</nav>
+    <div class="flex">
+        {% include 'admin/partials/sidebar.html' %}
+        
+        <!-- Main content -->
+        <div class="flex-1">
+            <main class="flex-1 pb-8">
+                <!-- Page header -->
+                <div class="bg-white shadow">
+                    <div class="px-4 sm:px-6 lg:max-w-6xl lg:mx-auto lg:px-8">
+                        <div class="py-6 md:flex md:items-center md:justify-between">
+                            <div class="flex-1 min-w-0">
+                                <h1 class="text-2xl font-bold leading-7 text-gray-900 sm:text-3xl sm:truncate">
+                                    {% block page_title %}Dashboard Overview{% endblock %}
+                                </h1>
+                            </div>
+                            <div class="mt-4 flex-shrink-0 flex md:mt-0 md:ml-4">
+                                {% block header_buttons %}
+                                <button type="button" class="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary-500">
+                                    <i class="fas fa-sync-alt mr-2"></i>
+                                    Refresh
+                                </button>
+                                {% endblock %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-<div class="flex">
-    <!-- Sidebar -->
-    <div id="sidebar" class="sidebar bg-primary text-white h-screen w-64">
-        <div class="p-4">
-            <h2 class="text-xl font-bold sidebar-text">Test Bank System</h2>
-        </div>
-        
-        <ul class="mt-6">
-            <li class="mb-2">
-                <a href="{% url 'admin_dashboard' %}" class="flex items-center px-4 py-3 text-white bg-blue-700">
-                    <i class="fas fa-tachometer-alt w-6"></i>
-                    <span class="ml-3 sidebar-text">Dashboard</span>
-                </a>
-            </li>
-            <li class="mb-2">
-                <a href="{% url 'manage_departments' %}" class="flex items-center px-4 py-3 text-white hover:bg-blue-700">
-                    <i class="fas fa-building w-6"></i>
-                    <span class="ml-3 sidebar-text">Manage Departments</span>
-                </a>
-            </li>
-            <li class="mb-2">
-                <a href="{% url 'manage_subjects' %}" class="flex items-center px-4 py-3 text-white hover:bg-blue-700">
-                    <i class="fas fa-book w-6"></i>
-                    <span class="ml-3 sidebar-text">Manage Subjects</span>
-                </a>
-            </li>
-            <li class="mb-2">
-                <a href="{% url 'manage_teachers' %}" class="flex items-center px-4 py-3 text-white hover:bg-blue-700">
-                    <i class="fas fa-chalkboard-teacher w-6"></i>
-                    <span class="ml-3 sidebar-text">Manage Teachers</span>
-                </a>
-            </li>
-            <li class="mb-2">
-                <a href="{% url 'manage_folders' %}" class="flex items-center px-4 py-3 text-white hover:bg-blue-700">
-                    <i class="fas fa-folder w-6"></i>
-                    <span class="ml-3 sidebar-text">Create Upload Folders</span>
-                </a>
-            </li>
-            <li class="mb-2">
-                <a href="{% url 'view_questionnaires' %}" class="flex items-center px-4 py-3 text-white hover:bg-blue-700">
-                    <i class="fas fa-file-alt w-6"></i>
-                    <span class="ml-3 sidebar-text">View Uploaded Questionnaires</span>
-                </a>
-            </li>
-        </ul>
-    </div>
+                {% block admin_content %}
+                <!-- Stats -->
+                <div class="mt-8">
+                    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                            <!-- Card -->
+                            <div class="bg-white overflow-hidden shadow rounded-lg">
+                                <div class="p-5">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-chalkboard-teacher text-primary-500 text-2xl"></i>
+                                        </div>
+                                        <div class="ml-5 w-0 flex-1">
+                                            <dl>
+                                                <dt class="text-sm font-medium text-gray-500 truncate">Total Teachers</dt>
+                                                <dd>
+                                                    <div class="text-lg font-medium text-gray-900">{{ teachers_count }}</div>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 px-5 py-3">
+                                    <div class="text-sm">
+                                        <a href="{% url 'manage_teachers' %}" class="font-medium text-primary-700 hover:text-primary-900">View all</a>
+                                    </div>
+                                </div>
+                            </div>
 
-    <!-- Main Content -->
-    <div id="main-content" class="main-content flex-1 p-6 ml-64">
-        <div class="mb-6">
-            <h2 class="text-2xl font-bold text-gray-800">Dashboard Overview</h2>
-        </div>
-        
-        <!-- Stats Cards -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-blue-100 text-primary mr-4">
-                        <i class="fas fa-chalkboard-teacher text-xl"></i>
-                    </div>
-                    <div>
-                        <p class="text-gray-500">Total Teachers</p>
-                        <h3 class="text-2xl font-bold">{{ stats.total_teachers }}</h3>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-green-100 text-green-500 mr-4">
-                        <i class="fas fa-book text-xl"></i>
-                    </div>
-                    <div>
-                        <p class="text-gray-500">Total Subjects</p>
-                        <h3 class="text-2xl font-bold">{{ stats.total_subjects }}</h3>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="bg-white p-6 rounded-lg shadow-md">
-                <div class="flex items-center">
-                    <div class="p-3 rounded-full bg-purple-100 text-purple-500 mr-4">
-                        <i class="fas fa-file-alt text-xl"></i>
-                    </div>
-                    <div>
-                        <p class="text-gray-500">Uploaded Files</p>
-                        <h3 class="text-2xl font-bold">{{ stats.total_files }}</h3>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Recent Activity -->
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <div class="flex justify-between items-center mb-6">
-                <h3 class="text-xl font-bold text-gray-800">Recent Uploads</h3>
-                <button class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700">View All</button>
-            </div>
-            
-            <div class="overflow-x-auto">
-                <table class="w-full">
-                    <thead>
-                        <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-left">Filename</th>
-                            <th class="py-3 px-6 text-left">Subject</th>
-                            <th class="py-3 px-6 text-left">Teacher</th>
-                            <th class="py-3 px-6 text-left">Date</th>
-                            <th class="py-3 px-6 text-center">Actions</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-600 text-sm">
-                        {% for file in recent_files %}
-                        <tr class="border-b border-gray-200 hover:bg-gray-50">
-                            <td class="py-3 px-6 text-left">
-                                <div class="flex items-center">
-                                    <i class="fas fa-file-pdf text-red-500 mr-2"></i>
-                                    <span>{{ file.filename }}</span>
+                            <!-- Card -->
+                            <div class="bg-white overflow-hidden shadow rounded-lg">
+                                <div class="p-5">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-book text-primary-500 text-2xl"></i>
+                                        </div>
+                                        <div class="ml-5 w-0 flex-1">
+                                            <dl>
+                                                <dt class="text-sm font-medium text-gray-500 truncate">Total Subjects</dt>
+                                                <dd>
+                                                    <div class="text-lg font-medium text-gray-900">{{ subjects_count }}</div>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    </div>
                                 </div>
-                            </td>
-                            <td class="py-3 px-6 text-left">{{ file.subject }}</td>
-                            <td class="py-3 px-6 text-left">{{ file.teacher }}</td>
-                            <td class="py-3 px-6 text-left">{{ file.upload_date }}</td>
-                            <td class="py-3 px-6 text-center">
-                                <div class="flex item-center justify-center">
-                                    <button class="text-blue-500 hover:text-blue-700 mx-2">
-                                        <i class="fas fa-eye"></i>
-                                    </button>
-                                    <button class="text-green-500 hover:text-green-700 mx-2">
-                                        <i class="fas fa-download"></i>
-                                    </button>
+                                <div class="bg-gray-50 px-5 py-3">
+                                    <div class="text-sm">
+                                        <a href="{% url 'manage_subjects' %}" class="font-medium text-primary-700 hover:text-primary-900">View all</a>
+                                    </div>
                                 </div>
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </tbody>
-                </table>
-            </div>
+                            </div>
+
+                            <!-- Card -->
+                            <div class="bg-white overflow-hidden shadow rounded-lg">
+                                <div class="p-5">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-file-alt text-primary-500 text-2xl"></i>
+                                        </div>
+                                        <div class="ml-5 w-0 flex-1">
+                                            <dl>
+                                                <dt class="text-sm font-medium text-gray-500 truncate">Uploaded Files</dt>
+                                                <dd>
+                                                    <div class="text-lg font-medium text-gray-900">{{ files_count }}</div>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="bg-gray-50 px-5 py-3">
+                                    <div class="text-sm">
+                                        <a href="{% url 'view_questionnaires' %}" class="font-medium text-primary-700 hover:text-primary-900">View all</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="mt-8 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <h2 class="text-lg leading-6 font-medium text-gray-900 mb-4">Recent Activity</h2>
+                    <div class="flex flex-col">
+                        <div class="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
+                            <div class="py-2 align-middle inline-block min-w-full sm:px-6 lg:px-8">
+                                <div class="shadow overflow-hidden border-b border-gray-200 sm:rounded-lg">
+                                    <table class="min-w-full divide-y divide-gray-200">
+                                        <thead class="bg-gray-50">
+                                            <tr>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Teacher
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Subject
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    File
+                                                </th>
+                                                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                                    Date
+                                                </th>
+                                                <th scope="col" class="relative px-6 py-3">
+                                                    <span class="sr-only">Actions</span>
+                                                </th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="bg-white divide-y divide-gray-200">
+                                            {% for activity in recent_activities %}
+                                            <tr>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="flex items-center">
+                                                        <div class="flex-shrink-0 h-10 w-10">
+                                                            <div class="h-10 w-10 rounded-full bg-gray-200 flex items-center justify-center">
+                                                                <span class="text-gray-700 font-medium">{{ activity.teacher.initials }}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="ml-4">
+                                                            <div class="text-sm font-medium text-gray-900">
+                                                                {{ activity.teacher.name }}
+                                                            </div>
+                                                            <div class="text-sm text-gray-500">
+                                                                {{ activity.teacher.email }}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="text-sm text-gray-900">{{ activity.subject }}</div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap">
+                                                    <div class="text-sm text-gray-900">{{ activity.filename }}</div>
+                                                    <div class="text-sm text-gray-500">{{ activity.size }}</div>
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                                                    {{ activity.date }}
+                                                </td>
+                                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                                    <a href="#" class="text-primary-600 hover:text-primary-900 mr-3">View</a>
+                                                    <a href="#" class="text-primary-600 hover:text-primary-900">Download</a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endblock %}
+            </main>
         </div>
     </div>
 </div>
-{% endblock %}
-
-{% block extra_js %}
-<script src="{% static 'js/admin.js' %}"></script>
 {% endblock %}

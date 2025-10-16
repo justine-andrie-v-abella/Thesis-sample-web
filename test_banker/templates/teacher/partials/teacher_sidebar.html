@@ -1,0 +1,26 @@
+<div class="hidden md:flex md:w-64 md:flex-col">
+    <div class="flex flex-col flex-grow pt-5 bg-white overflow-y-auto border-r">
+        <div class="flex items-center flex-shrink-0 px-4">
+            <span class="text-lg font-semibold">Teacher Panel</span>
+        </div>
+        <div class="mt-5 flex-grow flex flex-col">
+            <nav class="flex-1 px-2 pb-4 space-y-1">
+                <a href="{% url 'teacher_dashboard' %}" 
+                   class="{% if request.resolver_match.url_name == 'teacher_dashboard' %}bg-primary-100 text-primary-900{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                    <i class="fas fa-book {% if request.resolver_match.url_name == 'teacher_dashboard' %}text-primary-500{% else %}text-gray-400{% endif %} mr-3"></i>
+                    My Subjects
+                </a>
+                <a href="#" 
+                   class="{% if request.resolver_match.url_name == 'upload_questionnaire' %}bg-primary-100 text-primary-900{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                    <i class="fas fa-upload {% if request.resolver_match.url_name == 'upload_questionnaire' %}text-primary-500{% else %}text-gray-400{% endif %} mr-3"></i>
+                    Upload Questionnaire
+                </a>
+                <a href="{% url 'my_questionnaires' %}" 
+                   class="{% if request.resolver_match.url_name == 'my_questionnaires' %}bg-primary-100 text-primary-900{% else %}text-gray-600 hover:bg-gray-50 hover:text-gray-900{% endif %} group flex items-center px-2 py-2 text-sm font-medium rounded-md">
+                    <i class="fas fa-file-alt {% if request.resolver_match.url_name == 'my_questionnaires' %}text-primary-500{% else %}text-gray-400{% endif %} mr-3"></i>
+                    My Uploaded Questionnaires
+                </a>
+            </nav>
+        </div>
+    </div>
+</div>

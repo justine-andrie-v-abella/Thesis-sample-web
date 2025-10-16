@@ -4,26 +4,246 @@
 {% block title %}Manage Departments - Test Bank Management System{% endblock %}
 
 {% block content %}
-<nav class="bg-white shadow-md py-4 px-6 flex justify-between items-center">
-    <div class="flex items-center">
-        <button id="sidebar-toggle" class="text-gray-600 mr-4 focus:outline-none">
-            <i class="fas fa-bars text-xl"></i>
-        </button>
-        <h1 class="text-xl font-bold text-primary">Admin Dashboard</h1>
-    </div>
-    <!-- User menu same as dashboard -->
-</nav>
+<!-- Navbar -->
+{% include "admin/partials/navbar.html" %}
 
 <div class="flex">
-    <div id="sidebar" class="sidebar bg-primary text-white h-screen w-64">
-        <!-- Same sidebar as dashboard -->
-    </div>
-    
-    <div class="flex-1 p-6 ml-64">
-        <h1 class="text-2xl font-bold text-gray-800 mb-6">Manage Departments</h1>
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <p>Department management content will go here.</p>
+    <!-- Sidebar -->
+    {% include "admin/partials/sidebar.html" %}
+
+    <!-- Main Content -->
+    <div id="main-content" class="main-content flex-1 p-4 lg:p-6">
+        <div class="content-wrapper">
+            <div class="flex justify-between items-center mb-6">
+                <h2 class="text-2xl font-bold text-gray-800">Manage Departments</h2>
+                <button id="create-department-btn" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center">
+                    <i class="fas fa-plus mr-2"></i> Add Department
+                </button>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6 mb-6 lg:mb-8">
+                <div class="bg-white p-4 lg:p-6 rounded-lg shadow-md">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-blue-100 text-primary mr-4">
+                            <i class="fas fa-building text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-500">Total Departments</p>
+                            <h3 class="text-2xl font-bold">12</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 lg:p-6 rounded-lg shadow-md">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-green-100 text-green-500 mr-4">
+                            <i class="fas fa-book text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-500">Active Subjects</p>
+                            <h3 class="text-2xl font-bold">42</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 lg:p-6 rounded-lg shadow-md">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-purple-100 text-purple-500 mr-4">
+                            <i class="fas fa-chalkboard-teacher text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-500">Department Teachers</p>
+                            <h3 class="text-2xl font-bold">86</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white p-4 lg:p-6 rounded-lg shadow-md">
+                    <div class="flex items-center">
+                        <div class="p-3 rounded-full bg-orange-100 text-orange-500 mr-4">
+                            <i class="fas fa-file-alt text-xl"></i>
+                        </div>
+                        <div>
+                            <p class="text-gray-500">Department Files</p>
+                            <h3 class="text-2xl font-bold">234</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Departments Table -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <div class="p-4 lg:p-6 border-b">
+                    <div class="flex flex-col lg:flex-row lg:justify-between lg:items-center gap-4">
+                        <h3 class="text-xl font-bold text-gray-800">Departments List</h3>
+                        <div class="flex flex-col sm:flex-row gap-2">
+                            <input type="text" placeholder="Search departments..." class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary w-full sm:w-auto">
+                            <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200 flex items-center justify-center">
+                                <i class="fas fa-filter mr-2"></i>
+                                <span class="hidden sm:inline">Filter</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                                <th class="py-3 px-4 lg:px-6 text-left">Department Name</th>
+                                <th class="py-3 px-4 lg:px-6 text-left">Code</th>
+                                <th class="py-3 px-4 lg:px-6 text-left hidden md:table-cell">Head of Department</th>
+                                <th class="py-3 px-4 lg:px-6 text-left hidden sm:table-cell">Subjects</th>
+                                <th class="py-3 px-4 lg:px-6 text-left hidden sm:table-cell">Teachers</th>
+                                <th class="py-3 px-4 lg:px-6 text-center">Status</th>
+                                <th class="py-3 px-4 lg:px-6 text-center">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody class="text-gray-600 text-sm">
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4 lg:px-6 text-left">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-building text-blue-500 mr-3"></i>
+                                        <span class="font-medium">Computer Science</span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4 lg:px-6 text-left">CS</td>
+                                <td class="py-3 px-4 lg:px-6 text-left hidden md:table-cell">Dr. Sarah Johnson</td>
+                                <td class="py-3 px-4 lg:px-6 text-left hidden sm:table-cell">8</td>
+                                <td class="py-3 px-4 lg:px-6 text-left hidden sm:table-cell">12</td>
+                                <td class="py-3 px-4 lg:px-6 text-center">
+                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Active</span>
+                                </td>
+                                <td class="py-3 px-4 lg:px-6 text-center">
+                                    <div class="flex item-center justify-center space-x-1 lg:space-x-2">
+                                        <button class="text-blue-500 hover:text-blue-700" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-green-500 hover:text-green-700" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="text-red-500 hover:text-red-700" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4 lg:px-6 text-left">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-building text-green-500 mr-3"></i>
+                                        <span class="font-medium">Mathematics</span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4 lg:px-6 text-left">MATH</td>
+                                <td class="py-3 px-4 lg:px-6 text-left hidden md:table-cell">Prof. Michael Brown</td>
+                                <td class="py-3 px-4 lg:px-6 text-left hidden sm:table-cell">6</td>
+                                <td class="py-3 px-4 lg:px-6 text-left hidden sm:table-cell">10</td>
+                                <td class="py-3 px-4 lg:px-6 text-center">
+                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Active</span>
+                                </td>
+                                <td class="py-3 px-4 lg:px-6 text-center">
+                                    <div class="flex item-center justify-center space-x-1 lg:space-x-2">
+                                        <button class="text-blue-500 hover:text-blue-700" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-green-500 hover:text-green-700" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="text-red-500 hover:text-red-700" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50">
+                                <td class="py-3 px-4 lg:px-6 text-left">
+                                    <div class="flex items-center">
+                                        <i class="fas fa-building text-purple-500 mr-3"></i>
+                                        <span class="font-medium">Physics</span>
+                                    </div>
+                                </td>
+                                <td class="py-3 px-4 lg:px-6 text-left">PHY</td>
+                                <td class="py-3 px-4 lg:px-6 text-left hidden md:table-cell">Dr. Emily Chen</td>
+                                <td class="py-3 px-4 lg:px-6 text-left hidden sm:table-cell">5</td>
+                                <td class="py-3 px-4 lg:px-6 text-left hidden sm:table-cell">8</td>
+                                <td class="py-3 px-4 lg:px-6 text-center">
+                                    <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Active</span>
+                                </td>
+                                <td class="py-3 px-4 lg:px-6 text-center">
+                                    <div class="flex item-center justify-center space-x-1 lg:space-x-2">
+                                        <button class="text-blue-500 hover:text-blue-700" title="Edit">
+                                            <i class="fas fa-edit"></i>
+                                        </button>
+                                        <button class="text-green-500 hover:text-green-700" title="View">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                        <button class="text-red-500 hover:text-red-700" title="Delete">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="p-4 border-t flex flex-col sm:flex-row justify-between items-center gap-4">
+                    <div class="text-sm text-gray-600">
+                        Showing 1 to 3 of 12 departments
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="px-3 py-1 border rounded-lg hover:bg-gray-100 text-sm">Previous</button>
+                        <button class="px-3 py-1 bg-primary text-white rounded-lg text-sm">1</button>
+                        <button class="px-3 py-1 border rounded-lg hover:bg-gray-100 text-sm">2</button>
+                        <button class="px-3 py-1 border rounded-lg hover:bg-gray-100 text-sm">3</button>
+                        <button class="px-3 py-1 border rounded-lg hover:bg-gray-100 text-sm">Next</button>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+{% comment %} 
+<!-- Create Department Modal -->
+<div id="create-department-modal" class="modal">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md">
+        <div class="p-6 border-b">
+            <h3 class="text-xl font-bold text-gray-800">Create New Department</h3>
+        </div>
+        <div class="p-6">
+            <form id="create-department-form">
+                <div class="mb-4">
+                    <label for="department-name" class="block text-gray-700 mb-2">Department Name</label>
+                    <input type="text" id="department-name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter department name" required>
+                </div>
+                <div class="mb-4">
+                    <label for="department-code" class="block text-gray-700 mb-2">Department Code</label>
+                    <input type="text" id="department-code" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter department code" required>
+                </div>
+                <div class="mb-4">
+                    <label for="department-head" class="block text-gray-700 mb-2">Head of Department</label>
+                    <select id="department-head" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        <option value="">Select Head of Department</option>
+                        <option value="1">Dr. Sarah Johnson</option>
+                        <option value="2">Prof. Michael Brown</option>
+                        <option value="3">Dr. Emily Chen</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="flex items-center">
+                        <input type="checkbox" class="rounded border-gray-300 text-primary focus:ring-primary">
+                        <span class="ml-2 text-gray-700">Active Department</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="p-6 border-t flex justify-end">
+            <button id="close-department-modal" class="px-4 py-2 text-gray-600 mr-2 rounded-lg border hover:bg-gray-100">Cancel</button>
+            <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700">Create Department</button>
+        </div>
+    </div>
+</div> {% endcomment %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/admin.js' %}"></script>
 {% endblock %}

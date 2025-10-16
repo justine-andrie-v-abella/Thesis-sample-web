@@ -7,9 +7,8 @@
                 </div>
                 <div class="hidden md:block">
                     <div class="ml-10 flex items-baseline space-x-4">
-                        <a href="{% url 'admin_dashboard' %}" class="px-3 py-2 rounded-md text-sm font-medium {% if request.resolver_match.url_name == 'admin_dashboard' %}bg-primary-900 text-white{% else %}text-primary-200 hover:text-white hover:bg-primary-700{% endif %}">Dashboard</a>
-                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-primary-200 hover:text-white hover:bg-primary-700">Reports</a>
-                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-primary-200 hover:text-white hover:bg-primary-700">Settings</a>
+                        <a href="{% url 'teacher_dashboard' %}" class="px-3 py-2 rounded-md text-sm font-medium {% if request.resolver_match.url_name == 'teacher_dashboard' %}bg-primary-900 text-white{% else %}text-primary-200 hover:text-white hover:bg-primary-700{% endif %}">Dashboard</a>
+                        <a href="#" class="px-3 py-2 rounded-md text-sm font-medium text-primary-200 hover:text-white hover:bg-primary-700">My Profile</a>
                     </div>
                 </div>
             </div>
@@ -20,7 +19,7 @@
                     </button>
                     <div class="ml-3 relative">
                         <div>
-                            <button class="max-w-xs bg-primary-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-800 focus:ring-white" id="user-menu-button">
+                            <button class="max-w-xs bg-primary-800 rounded-full flex items-center text-sm focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-800 focus:ring-white" id="teacher-user-menu-button">
                                 <span class="sr-only">Open user menu</span>
                                 <div class="h-8 w-8 rounded-full bg-primary-200 flex items-center justify-center">
                                     <span class="text-primary-800 font-medium">{{ user.initials }}</span>
@@ -31,7 +30,7 @@
                 </div>
             </div>
             <div class="-mr-2 flex md:hidden">
-                <button type="button" class="bg-primary-800 inline-flex items-center justify-center p-2 rounded-md text-primary-200 hover:text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-800 focus:ring-white" id="mobile-menu-button">
+                <button type="button" class="bg-primary-800 inline-flex items-center justify-center p-2 rounded-md text-primary-200 hover:text-white hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary-800 focus:ring-white" id="teacher-mobile-menu-button">
                     <span class="sr-only">Open main menu</span>
                     <i class="fas fa-bars"></i>
                 </button>
@@ -40,11 +39,10 @@
     </div>
 
     <!-- Mobile menu -->
-    <div class="md:hidden hidden" id="mobile-menu">
+    <div class="md:hidden hidden" id="teacher-mobile-menu">
         <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a href="{% url 'admin_dashboard' %}" class="{% if request.resolver_match.url_name == 'admin_dashboard' %}bg-primary-900 text-white{% else %}text-primary-200 hover:text-white hover:bg-primary-700{% endif %} block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
-            <a href="#" class="text-primary-200 hover:text-white hover:bg-primary-700 block px-3 py-2 rounded-md text-base font-medium">Reports</a>
-            <a href="#" class="text-primary-200 hover:text-white hover:bg-primary-700 block px-3 py-2 rounded-md text-base font-medium">Settings</a>
+            <a href="{% url 'teacher_dashboard' %}" class="{% if request.resolver_match.url_name == 'teacher_dashboard' %}bg-primary-900 text-white{% else %}text-primary-200 hover:text-white hover:bg-primary-700{% endif %} block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
+            <a href="#" class="text-primary-200 hover:text-white hover:bg-primary-700 block px-3 py-2 rounded-md text-base font-medium">My Profile</a>
         </div>
         <div class="pt-4 pb-3 border-t border-primary-700">
             <div class="flex items-center px-5">

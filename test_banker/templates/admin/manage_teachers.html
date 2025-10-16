@@ -1,0 +1,270 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Manage Teachers - Test Bank Management System{% endblock %}
+
+{% block content %}
+<!-- Navbar -->
+{% include "admin/partials/navbar.html" %}
+
+<div class="flex">
+    <!-- Sidebar -->
+    {% include "admin/partials/sidebar.html" %}
+
+    <!-- Main Content -->
+    <div id="main-content" class="main-content flex-1 p-6 lg:p-6">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-gray-800">Manage Teachers</h2>
+            <button id="create-teacher-btn" class="bg-primary text-white px-4 py-2 rounded-lg hover:bg-blue-700 flex items-center">
+                <i class="fas fa-plus mr-2"></i> Add Teacher
+            </button>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-blue-100 text-primary mr-4">
+                        <i class="fas fa-chalkboard-teacher text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-500">Total Teachers</p>
+                        <h3 class="text-2xl font-bold">24</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-green-100 text-green-500 mr-4">
+                        <i class="fas fa-check-circle text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-500">Active Teachers</p>
+                        <h3 class="text-2xl font-bold">22</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-purple-100 text-purple-500 mr-4">
+                        <i class="fas fa-book text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-500">Assigned Subjects</p>
+                        <h3 class="text-2xl font-bold">68</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-orange-100 text-orange-500 mr-4">
+                        <i class="fas fa-file-upload text-xl"></i>
+                    </div>
+                    <div>
+                        <p class="text-gray-500">Total Uploads</p>
+                        <h3 class="text-2xl font-bold">156</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Teachers Table -->
+        <div class="bg-white rounded-lg shadow-md">
+            <div class="p-6 border-b">
+                <div class="flex justify-between items-center">
+                    <h3 class="text-xl font-bold text-gray-800">Teachers List</h3>
+                    <div class="flex space-x-2">
+                        <select class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                            <option>All Departments</option>
+                            <option>Computer Science</option>
+                            <option>Mathematics</option>
+                            <option>Physics</option>
+                        </select>
+                        <input type="text" placeholder="Search teachers..." class="px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary">
+                        <button class="bg-gray-100 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-200">
+                            <i class="fas fa-filter"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full">
+                    <thead>
+                        <tr class="bg-gray-100 text-gray-600 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left">Teacher</th>
+                            <th class="py-3 px-6 text-left">Employee ID</th>
+                            <th class="py-3 px-6 text-left">Department</th>
+                            <th class="py-3 px-6 text-left">Subjects</th>
+                            <th class="py-3 px-6 text-left">Uploads</th>
+                            <th class="py-3 px-6 text-left">Last Active</th>
+                            <th class="py-3 px-6 text-center">Status</th>
+                            <th class="py-3 px-6 text-center">Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 text-sm">
+                        <tr class="border-b border-gray-200 hover:bg-gray-50">
+                            <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <img class="w-8 h-8 rounded-full mr-3" src="https://ui-avatars.com/api/?name=Sarah+Johnson&background=1e40af&color=fff" alt="Sarah Johnson">
+                                    <div>
+                                        <span class="font-medium">Dr. Sarah Johnson</span>
+                                        <p class="text-gray-500 text-xs">sarah.j@university.edu</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-left">EMP001</td>
+                            <td class="py-3 px-6 text-left">Computer Science</td>
+                            <td class="py-3 px-6 text-left">4</td>
+                            <td class="py-3 px-6 text-left">23</td>
+                            <td class="py-3 px-6 text-left">2 hours ago</td>
+                            <td class="py-3 px-6 text-center">
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Active</span>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex item-center justify-center space-x-2">
+                                    <button class="text-blue-500 hover:text-blue-700">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-green-500 hover:text-green-700">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="text-red-500 hover:text-red-700">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-50">
+                            <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <img class="w-8 h-8 rounded-full mr-3" src="https://ui-avatars.com/api/?name=Michael+Brown&background=059669&color=fff" alt="Michael Brown">
+                                    <div>
+                                        <span class="font-medium">Prof. Michael Brown</span>
+                                        <p class="text-gray-500 text-xs">michael.b@university.edu</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-left">EMP002</td>
+                            <td class="py-3 px-6 text-left">Mathematics</td>
+                            <td class="py-3 px-6 text-left">3</td>
+                            <td class="py-3 px-6 text-left">18</td>
+                            <td class="py-3 px-6 text-left">1 day ago</td>
+                            <td class="py-3 px-6 text-center">
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Active</span>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex item-center justify-center space-x-2">
+                                    <button class="text-blue-500 hover:text-blue-700">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-green-500 hover:text-green-700">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="text-red-500 hover:text-red-700">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="border-b border-gray-200 hover:bg-gray-50">
+                            <td class="py-3 px-6 text-left">
+                                <div class="flex items-center">
+                                    <img class="w-8 h-8 rounded-full mr-3" src="https://ui-avatars.com/api/?name=Emily+Chen&background=7c3aed&color=fff" alt="Emily Chen">
+                                    <div>
+                                        <span class="font-medium">Dr. Emily Chen</span>
+                                        <p class="text-gray-500 text-xs">emily.c@university.edu</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-left">EMP003</td>
+                            <td class="py-3 px-6 text-left">Physics</td>
+                            <td class="py-3 px-6 text-left">2</td>
+                            <td class="py-3 px-6 text-left">12</td>
+                            <td class="py-3 px-6 text-left">3 days ago</td>
+                            <td class="py-3 px-6 text-center">
+                                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Active</span>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex item-center justify-center space-x-2">
+                                    <button class="text-blue-500 hover:text-blue-700">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                    <button class="text-green-500 hover:text-green-700">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="text-red-500 hover:text-red-700">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <div class="p-4 border-t flex justify-between items-center">
+                <div class="text-sm text-gray-600">
+                    Showing 1 to 3 of 24 teachers
+                </div>
+                <div class="flex space-x-2">
+                    <button class="px-3 py-1 border rounded-lg hover:bg-gray-100">Previous</button>
+                    <button class="px-3 py-1 bg-primary text-white rounded-lg">1</button>
+                    <button class="px-3 py-1 border rounded-lg hover:bg-gray-100">2</button>
+                    <button class="px-3 py-1 border rounded-lg hover:bg-gray-100">3</button>
+                    <button class="px-3 py-1 border rounded-lg hover:bg-gray-100">Next</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% comment %} 
+<!-- Create Teacher Modal -->
+<div id="create-teacher-modal" class="modal">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md">
+        <div class="p-6 border-b">
+            <h3 class="text-xl font-bold text-gray-800">Add New Teacher</h3>
+        </div>
+        <div class="p-6">
+            <form id="create-teacher-form">
+                <div class="mb-4">
+                    <label for="teacher-name" class="block text-gray-700 mb-2">Full Name</label>
+                    <input type="text" id="teacher-name" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter full name" required>
+                </div>
+                <div class="mb-4">
+                    <label for="teacher-email" class="block text-gray-700 mb-2">Email</label>
+                    <input type="email" id="teacher-email" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter email address" required>
+                </div>
+                <div class="mb-4">
+                    <label for="teacher-id" class="block text-gray-700 mb-2">Employee ID</label>
+                    <input type="text" id="teacher-id" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" placeholder="Enter employee ID" required>
+                </div>
+                <div class="mb-4">
+                    <label for="teacher-department" class="block text-gray-700 mb-2">Department</label>
+                    <select id="teacher-department" class="w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary" required>
+                        <option value="">Select Department</option>
+                        <option value="1">Computer Science</option>
+                        <option value="2">Mathematics</option>
+                        <option value="3">Physics</option>
+                        <option value="4">Chemistry</option>
+                    </select>
+                </div>
+                <div class="mb-4">
+                    <label class="flex items-center">
+                        <input type="checkbox" class="rounded border-gray-300 text-primary focus:ring-primary" checked>
+                        <span class="ml-2 text-gray-700">Active Account</span>
+                    </label>
+                </div>
+            </form>
+        </div>
+        <div class="p-6 border-t flex justify-end">
+            <button id="close-teacher-modal" class="px-4 py-2 text-gray-600 mr-2 rounded-lg border hover:bg-gray-100">Cancel</button>
+            <button class="px-4 py-2 bg-primary text-white rounded-lg hover:bg-blue-700">Add Teacher</button>
+        </div>
+    </div>
+</div> {% endcomment %}
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'js/admin.js' %}"></script>
+{% endblock %}
